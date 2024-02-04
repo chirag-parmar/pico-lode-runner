@@ -1,0 +1,30 @@
+cmake_minimum_required(VERSION 3.13)
+
+# initialize pico-sdk from submodule
+# note: this must happen before project()
+include(pico-sdk/pico_sdk_init.cmake)
+
+project(my_project)
+
+# initialize the Raspberry Pi Pico SDK
+pico_sdk_init()
+
+# Add -O0 to remove optimizations when using gcc
+IF(CMAKE_COMPILER_IS_GNUCC)
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0")
+    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0")
+ENDIF(CMAKE_COMPILER_IS_GNUCC)
+
+add_executable(pico_console src/main.c src/hid_app.c)
+
+target_include_directories(pico_console PUBLIC src/)
+
+# pull in common dependencies
+target_link_libraries(pico_console PUBLIC pico_stdlib tinyusb_host tinyusb_board)
+
+pico_enable_stdio_uart(pico_console 1)
+
+# create map/bin/hex/uf2 file etc.
+pico_add_extra_outputs(pico_console)
+
+add_subdirectory(uart-bridge)
