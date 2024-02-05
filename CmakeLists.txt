@@ -15,7 +15,7 @@ IF(CMAKE_COMPILER_IS_GNUCC)
     set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0")
 ENDIF(CMAKE_COMPILER_IS_GNUCC)
 
-add_executable(pico_console src/main.c src/hid_app.c)
+add_executable(pico_console src/main.c src/ds4.c)
 
 target_include_directories(pico_console PUBLIC src/)
 
