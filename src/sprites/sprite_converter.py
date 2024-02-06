@@ -18,13 +18,12 @@ def extract_sprites(path):
 	img= Image.open(path)
 	arr = np.array(img)
 
-	num_sprites_x = arr.shape[0] // 16
-	num_sprites_y = arr.shape[1] // 16
-
 	# raise Exception("hello")
+	num = 0
 
-	for k in range(num_sprites_x):
-		for l in range(num_sprites_y):
-			convert_sprite(k, l, k*num_sprites_y + l, arr)
+	for k in range(0, arr.shape[0], 16):
+		for l in range(0, arr.shape[1], 16):
+			convert_sprite(k, l, num, arr)
+			num+=1
 
 extract_sprites('/Users/chirag/Desktop/EMBEDDED/lode-runner-pico/src/sprites/lode-runner-char-tiles.png',)
