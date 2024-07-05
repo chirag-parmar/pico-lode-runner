@@ -23,7 +23,7 @@
  *
  */
 
-#include "bsp/board_api.h"
+#include "bsp/board.h"
 #include "tusb.h"
 
 /* From https://www.kernel.org/doc/html/latest/input/gamepad.html
@@ -137,6 +137,8 @@ typedef struct TU_ATTR_PACKED {
   uint8_t other[9];
 } sony_ds4_output_report_t;
 
+typedef void (*ds4_read_cb_t)(sony_ds4_input_report_t*, size_t);
 
+void ds4_init(ds4_read_cb_t);
+void ds4_task();
 void ds4_write(sony_ds4_output_report_t* output_report, size_t report_size);
-void ds4_read_cb(sony_ds4_input_report_t* input_report, size_t report_size);

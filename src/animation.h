@@ -15,7 +15,7 @@ typedef struct animation_s {
 
 /*
 * Creates a new animation object with the provides sprites as bitmaps
-* @param    speed       speed of switching through sprites in frmaes per second
+* @param    speed       how many pixels does the animation move in one cycle of all sprites
 * @param    num_args    number of sprites
 * @param    ...         sprites as bitmaps
 * @return   animation_t animation object       

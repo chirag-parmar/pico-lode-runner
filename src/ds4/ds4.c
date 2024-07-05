@@ -23,10 +23,11 @@
  *
  */
 
-#include "bsp/board_api.h"
+#include "bsp/board.h"
 #include "tusb.h"
 #include "ds4.h"
 
+static ds4_read_cb_t ds4_read_cb;
 static sony_ds4_input_report_t input_report;
 static bool ds4_mounted = false;
 static uint8_t ds4_dev_addr = 0;
@@ -122,4 +123,14 @@ void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance, uint8_t cons
   if ( !tuh_hid_receive_report(dev_addr, instance) ) {
     printf("Error: cannot request to receive report\r\n");
   }
+}
+
+void ds4_init(ds4_read_cb_t cb) {
+  board_init();
+  tuh_init(BOARD_TUH_RHPORT);
+  ds4_read_cb = cb;
+}
+
+void ds4_task() {
+  tuh_task();
 }
