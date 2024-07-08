@@ -26,4 +26,4 @@ def extract_sprites(path):
 			convert_sprite(k, l, num, arr)
 			num+=1
 
-extract_sprites('/Users/chirag/Desktop/EMBEDDED/lode-runner-pico/src/sprites/lode-runner-char-tiles.png',)
+extract_sprites('./lode-runner-level-tiles.png',)

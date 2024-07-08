@@ -18,7 +18,7 @@ ENDIF(CMAKE_COMPILER_IS_GNUCC)
 add_subdirectory(src/ili9341)
 add_subdirectory(src/ds4)
 
-add_executable(pico_console src/main.c src/animation.c)
+add_executable(pico_console src/main.c src/animation.c src/scene.c)
 
 target_include_directories(pico_console PUBLIC src/)
 
