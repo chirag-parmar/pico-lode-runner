@@ -61,10 +61,10 @@ int main() {
 
         if (fake_counter > 0 && fake_counter < 320000 && fake_counter % 1000 == 0) {
             pos_y = (pos_y + 1) > SCREEN_HEIGHT-16 ? SCREEN_HEIGHT-16 : pos_y + 1;
-            move_entity(&player, pos_x, pos_y);
+            scene_move_entity(&player, pos_x, pos_y);
         } else if (fake_counter > 400000 && fake_counter < 720000 && fake_counter % 500 == 0) {
             pos_y = (pos_y - 1) < 0 ? 0 : pos_y - 1;
-            move_entity(&player, pos_x, pos_y);
+            scene_move_entity(&player, pos_x, pos_y);
         } else if (fake_counter > 800000) {
             fake_counter = 0;
         } 

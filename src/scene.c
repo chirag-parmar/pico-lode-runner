@@ -7,6 +7,7 @@
 #include "char_tiles.h"
 #include "animation.h"
 #include "scene.h"
+#include "game.h"
 
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
@@ -42,24 +43,22 @@ void scene_set_background_fill_tile(uint16_t* background_tile, uint16_t num_rows
     }
 }
 
-void move_entity(entity_t* entity, uint16_t x, uint16_t y) {
-    if (entity->pos_x == x && entity->pos_y == y) {
+void scene_move_tile(uint16_t* tile, coordinates_t* old_pos, coordinates_t* new_pos) {
+    if (new_pos->x == old_pos->x && new_pos->y == old_pos->y) {
         return;
     }
     
-    uint16_t w_dash = abs(entity->pos_x - x) + TILE_WIDTH;
-    uint16_t h_dash = abs(entity->pos_y - y) + TILE_HEIGHT;
-    uint16_t x_dash = min(entity->pos_x, x);
-    uint16_t y_dash = min(entity->pos_y, y);
+    uint16_t w_dash = abs(old_pos->x - new_pos->x) + TILE_WIDTH;
+    uint16_t h_dash = abs(old_pos->y - new_pos->y) + TILE_HEIGHT;
+    uint16_t x_dash = min(old_pos->x, new_pos->x);
+    uint16_t y_dash = min(old_pos->y, new_pos->y);
 
     for (uint16_t row = 0; row < h_dash; row++) {
         memcpy(&dirty_rect[row * TILE_WIDTH], &frame[(y_dash + row) * SCREEN_WIDTH + x_dash], w_dash * sizeof(uint16_t));
     }
 
     LCD_WriteBitmap(x_dash, y_dash, w_dash, h_dash, dirty_rect);
-    entity->pos_x = x;
-    entity->pos_y = y;
-    PRINT_TILE(x, y, entity->tile);
+    PRINT_TILE(new_pos->x, new_pos->y, tile);
 }
 
 void scene_init() {
