@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 #include "animation.h"
-#include "game.h"
 
 void scene_set_background_tiles(uint16_t** background_tiles, uint16_t num_rows, uint16_t num_cols);
 void scene_set_background_fill_tile(uint16_t* background_tile, uint16_t num_rows, uint16_t num_cols);

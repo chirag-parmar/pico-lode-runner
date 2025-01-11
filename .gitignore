@@ -1,2 +1,6 @@
 build
 **/*/venv
+**/*/CMakeFiles
+**/*/MakeFile
+**/*/*.cmake
+**/*/*.a
